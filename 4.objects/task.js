@@ -15,18 +15,29 @@ Student.prototype.setSubject = function (subjectName) {
 
 Student.prototype.addMarks = function (...marksToAdd) {
 	if (this.hasOwnProperty("marks")) {
-		this.marks = [...this.marks, ...marksToAdd];
+		this.marks.push(...marksToAdd);
 	}
 }
 
+// Student.prototype.addMarks = function (...marksToAdd) {
+// 	if (this.hasOwnProperty("marks")) {
+// 		this.marks = [...this.marks, ...marksToAdd];
+// 	}
+// }
+
 Student.prototype.getAverage = function () {
-	if (this.hasOwnProperty("marks")) {
-		return this.marks.reduce((acc, mark) =>  acc + mark / this.marks.length, 0);
-	}
-	else {
-		return 0;
-	}
+	return this.marks && this.marks.length ? 
+		this.marks.reduce((acc, mark) =>  acc + mark / this.marks.length, 0) : 0;
 }
+
+// Student.prototype.getAverage = function () {
+// 	if (this.hasOwnProperty("marks")) {
+// 		return this.marks.reduce((acc, mark) =>  acc + mark / this.marks.length, 0);
+// 	}
+// 	else {
+// 		return 0;
+// 	}
+// }
 
 Student.prototype.exclude = function (reason) {
   this.excluded = reason;
