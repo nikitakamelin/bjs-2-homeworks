@@ -49,4 +49,4 @@ function getTriangle(a, b, c) {
 	} 
 }
 
-//console.log(getTriangle(20, 5, 5));
+
