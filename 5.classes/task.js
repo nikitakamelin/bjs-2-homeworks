@@ -83,9 +83,11 @@ class Library {
 		let findIndex = this.books.findIndex((item, index) => item.name === bookName);
 
 		if (findIndex !== -1) {
-			return this.books.splice(findIndex, 1);
-		} else
+			return this.books.splice(findIndex, 1)[0]; //Ошибка исправлена
+		} else {
 			return null;
+		}
+			
 	}
 }
 
@@ -93,12 +95,47 @@ class Library {
 
 //? ------------------------------ Задача 3 --------------------------------------//
 
-//Задачу 3 попробую решить чуть позже
+class Student {
+	constructor(name) {
+		this.name = name;
+		this.marks = {};
+		//this.marksArray = [];
+	}
 
+	addMark(mark, subject) {
+		if (mark < 2 || mark > 5) {
+			throw new Error('Невалидное значение оценки')
+		}
+	
+		if (!this.marks.hasOwnProperty(subject))	{
+			this.marks[subject] = [];
+		}
+		this.marks[subject].push(mark);
+	}
 
+	getAverageBySubject(subject) {
+		if (!this.marks.hasOwnProperty(subject))	{
+			return 0;
+		}
+		return this.marks[subject].reduce((acc, item) => acc + item / this.marks[subject].length, 0);
+	}
+
+	getAverage() {
+		let sum = 0;
+		for (let key of Object.keys(this.marks)) {
+			sum =  sum + this.getAverageBySubject(key);
+		}
+		return sum / Object.keys(this.marks).length;
+	}
+}
+
+// const student = new Student("Олег Никифоров");
+
+// student.addMark(4, "химия");
+// student.addMark(5, "химия");
+// student.addMark(5, "физика");
 
 ///?-----------------------------------------------------------------------------//
-
 
 // const library = new Library("Библиотека имени Ленина");
 
@@ -121,8 +158,7 @@ class Library {
 // library.addBook(new NovelBook("Герберт Уэллс", "Машина времени", 1895, 138));
 // library.addBook(new Magazine("Мурзилка", 1924, 60));
 
-//console.log(library.findBookBy("releaseDate", 1924).name); //"Мурзилка"
-
+//console.log(library.giveBookByName("Мурзилка"));
 //library.findBookBy("releaseDate", 1924); 
 
 
