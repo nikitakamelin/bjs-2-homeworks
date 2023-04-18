@@ -5,8 +5,11 @@ class AlarmClock {
 	}
 	// --------- Добавить будильник --------- //
 	addClock(time, callback) {
-		if (time === undefined || time === null ||
-			callback === undefined || callback === null) {
+		// if (time === undefined || time === null ||
+		// 	callback === undefined || callback === null) {
+		// 	throw new Error('Отсутствуют обязательные аргументы');
+		// } 
+		if (!time || !callback) {
 			throw new Error('Отсутствуют обязательные аргументы');
 		} 
 		
@@ -26,10 +29,10 @@ class AlarmClock {
 	}
 	// --------- Вернуть текущее время -------//
 	getCurrentFormattedTime() {
-
 		let currentDate = new Date();
+		let hours = ("0" + currentDate.getHours()).slice(-2);
 		let minutes = ("0" + currentDate.getMinutes()).slice(-2);
-		let currentTime = `${currentDate.getHours()}:${minutes}`;
+		let currentTime = `${hours}:${minutes}`;
 
 		return currentTime;
 	}
@@ -37,15 +40,16 @@ class AlarmClock {
 	start() {
 		if (this.intervalId !== null) {
 			return;
-		} else {
-			let id = setInterval(this.alarmCollection.forEach(item => {
-					if (item.time === this.getCurrentFormattedTime() && item.canCall === true) {
-						item.canCall = false;
-						item.callback();
-					}	
-				}), 1000);
-			this.intervalId = id;
-		}
+		} 
+		
+		let id = setInterval(this.alarmCollection.forEach(item => {
+			if (item.time === this.getCurrentFormattedTime() && item.canCall === true) {
+				item.canCall = false;
+				item.callback();
+			}	
+		}), 1000);
+
+		this.intervalId = id;
 	}
 	// ---------- Остановить интервал  ----------//
 	stop() {
