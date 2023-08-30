@@ -1,5 +1,5 @@
 
-const md5 = require('js-md5');
+
 
 //Задача № 1
 function cachingDecoratorNew(func) {
@@ -12,8 +12,8 @@ function cachingDecoratorNew(func) {
 		 let objectInCache = cache.find(item => item.hash === hash);
 		 
 		 if (objectInCache) {
-			console.log("Из кеша: " + objectInCache.value);
-			return "Из кеша: " + objectInCache.value;
+			console.log("Из кэша: " + objectInCache.value);
+			return "Из кэша: " + objectInCache.value;
 			}
 		 
 		 let result = func(...args);
@@ -53,12 +53,7 @@ function debounceDecoratorNew(func, delay) {
 	return wrapper;
  }
  
- module.exports = {
-	cachingDecoratorNew
- }
- module.exports = {
-	debounceDecoratorNew, 
- }
+
 
 //* Чек кеширующего декоратора
 let cachedMd5 = cachingDecoratorNew(md5);
