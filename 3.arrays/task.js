@@ -5,9 +5,13 @@ function compareArrays(arr1, arr2) {
 }
 
 // среднее значение возраста пользователей одного пола.
+// function getUsersNamesInAgeRange(users, gender) {
+// 	let arr = users.filter(user => user.gender === gender).map(item => item.age);
+// 	return arr.reduce((acc, current) => (acc + current/arr.length), 0)
+// }
+
 function getUsersNamesInAgeRange(users, gender) {
-	let arr = users.filter(user => user.gender === gender).map(item => item.age);
-	return arr.reduce((acc, current) => (acc + current/arr.length), 0)
+	return users.filter(user => user.gender === gender).map(item => item.age).reduce((acc, item, index, array) => (acc + item/array.length), 0);
 }
 
  
